@@ -27,8 +27,8 @@ class CatalogTest extends TestCase
     {
         $result = $this->katalog->searchProduct("Kemeja");
 
-        // Sengaja dibuat salah untuk simulasi Broken Build
-        $this->assertCount(99, $result);
+        // Dikembalikan ke kondisi benar
+        $this->assertCount(1, $result);
     }
 
     protected function tearDown(): void
