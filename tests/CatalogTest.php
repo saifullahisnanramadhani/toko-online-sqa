@@ -1,23 +1,38 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
+
 use PHPUnit\Framework\TestCase;
 use App\Catalog;
 
-
-class CatalogTest extends TestCase{
+class CatalogTest extends TestCase
+{
     private $katalog;
     private $testFile = __DIR__ . '/test_products.json';
 
-    protected function setUp(): void{
-        $dummyData = ["PRD-1" => ["nama" => "Kemeja Flanel", "harga" => 150000, "stok" => 10]];
+    protected function setUp(): void
+    {
+        $dummyData = [
+            "PRD-1" => [
+                "nama" => "Kemeja Flanel",
+                "harga" => 150000,
+                "stok" => 10
+            ]
+        ];
+
         file_put_contents($this->testFile, json_encode($dummyData));
         $this->katalog = new Catalog($this->testFile);
     }
 
-    public function testSearchProductFound(){
+    public function testSearchProductFound()
+    {
         $result = $this->katalog->searchProduct("Kemeja");
-        $this->assertCount(1, $result);
+
+        // Sengaja dibuat salah untuk simulasi Broken Build
+        $this->assertCount(99, $result);
     }
 
-    protected function tearDown(): void{ unlink($this->testFile); }
+    protected function tearDown(): void
+    {
+        unlink($this->testFile);
+    }
 }
